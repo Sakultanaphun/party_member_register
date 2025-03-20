@@ -1,0 +1,4884 @@
+<!DOCTYPE html>
+
+
+
+<html lang="th">
+
+
+
+<head>
+
+
+
+<meta charset="UTF-8">
+
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+<title>สมัครสมาชิกพรรค</title>
+
+
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+
+
+<script>
+
+
+
+tailwind.config = {
+
+
+
+darkMode: 'class',
+
+
+
+theme: {
+
+
+
+extend: {
+
+
+
+colors: {
+
+
+
+primary: {
+
+
+
+DEFAULT: '#5D5CDE',
+
+
+
+dark: '#6E6DF3',
+
+
+
+}
+
+
+
+}
+
+
+
+}
+
+
+
+}
+
+
+
+}
+
+
+
+</script>
+
+
+
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+
+
+<style>
+
+
+
+body {
+
+
+
+font-family: 'Sarabun', sans-serif;
+
+
+
+}
+
+
+
+.form-input {
+
+
+
+@apply block w-full rounded-md border-gray-300 shadow-sm px-4 py-3 bg-white dark:bg-gray-800 border dark:border-gray-700 focus:ring focus:ring-primary focus:ring-opacity-50 focus:border-primary dark:focus:border-primary-dark text-base;
+
+
+
+}
+
+
+
+.btn-primary {
+
+
+
+@apply bg-primary hover:bg-primary/90 text-white font-semibold py-2.5 px-6 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50 transition duration-150 ease-in-out dark:bg-primary-dark dark:hover:bg-primary-dark/90;
+
+
+
+}
+
+
+
+.btn-secondary {
+
+
+
+@apply bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-2.5 px-6 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-50 transition duration-150 ease-in-out dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-white;
+
+
+
+}
+
+
+
+.section-title {
+
+
+
+@apply text-lg font-semibold text-gray-800 dark:text-white mb-3 pb-1 border-b border-gray-200 dark:border-gray-700;
+
+
+
+}
+
+
+
+.form-label {
+
+
+
+@apply block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1;
+
+
+
+}
+
+
+
+.error-text {
+
+
+
+@apply text-red-600 dark:text-red-400 text-sm mt-1;
+
+
+
+}
+
+
+
+.step-indicator {
+
+
+
+@apply flex items-center justify-center w-8 h-8 rounded-full text-sm font-semibold transition-colors;
+
+
+
+}
+
+
+
+.step-active {
+
+
+
+@apply bg-primary text-white dark:bg-primary-dark;
+
+
+
+}
+
+
+
+.step-completed {
+
+
+
+@apply bg-green-500 text-white dark:bg-green-600;
+
+
+
+}
+
+
+
+.step-pending {
+
+
+
+@apply bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-300;
+
+
+
+}
+
+
+
+.step-line {
+
+
+
+@apply flex-1 h-1 mx-2 transition-colors;
+
+
+
+}
+
+
+
+.step-line-active {
+
+
+
+@apply bg-primary dark:bg-primary-dark;
+
+
+
+}
+
+
+
+.step-line-completed {
+
+
+
+@apply bg-green-500 dark:bg-green-600;
+
+
+
+}
+
+
+
+.step-line-pending {
+
+
+
+@apply bg-gray-200 dark:bg-gray-700;
+
+
+
+}
+
+
+
+.file-upload-label {
+
+
+
+@apply flex flex-col items-center justify-center w-full h-32 border-2 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100 border-gray-300 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700;
+
+
+
+}
+
+
+
+.file-upload-text {
+
+
+
+@apply mt-2 text-sm text-gray-500 dark:text-gray-400;
+
+
+
+}
+
+
+
+.party-branch-item {
+
+
+
+@apply flex items-center p-4 rounded-lg border bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-700 hover:border-primary dark:hover:border-primary-dark cursor-pointer;
+
+
+
+}
+
+
+
+.party-branch-item.selected {
+
+
+
+@apply border-primary dark:border-primary-dark bg-primary/5 dark:bg-primary-dark/10;
+
+
+
+}
+
+
+
+.payment-option {
+
+
+
+@apply rounded-lg border border-gray-300 dark:border-gray-700 p-4 cursor-pointer hover:border-primary dark:hover:border-primary-dark;
+
+
+
+}
+
+
+
+.payment-option.selected {
+
+
+
+@apply border-primary dark:border-primary-dark ring-2 ring-primary/30 dark:ring-primary-dark/30;
+
+
+
+}
+
+
+
+</style>
+
+
+
+</head>
+
+
+
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200">
+
+
+
+<script>
+
+
+
+// Dark mode detection
+
+
+
+if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+
+
+
+document.documentElement.classList.add('dark');
+
+
+
+}
+
+
+
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+
+
+
+if (event.matches) {
+
+
+
+document.documentElement.classList.add('dark');
+
+
+
+} else {
+
+
+
+document.documentElement.classList.remove('dark');
+
+
+
+}
+
+
+
+});
+
+
+
+</script>
+
+
+
+
+
+
+
+<div class="container mx-auto px-4 py-6 max-w-4xl">
+
+
+
+<header class="mb-8 text-center">
+
+
+
+<h1 class="text-3xl font-bold text-primary dark:text-primary-dark mb-2">สมัครสมาชิกพรรค</h1>
+
+
+
+<p class="text-gray-600 dark:text-gray-400">กรอกข้อมูลเพื่อเข้าร่วมเป็นส่วนหนึ่งของพรรคเรา</p>
+
+
+
+</header>
+
+
+
+
+
+
+
+<!-- แถบแสดงขั้นตอน -->
+
+
+
+<div class="mb-8">
+
+
+
+<div class="flex items-center justify-between max-w-2xl mx-auto mb-2">
+
+
+
+<div class="flex flex-col items-center">
+
+
+
+<div id="step1-indicator" class="step-indicator step-active">1</div>
+
+
+
+<span class="text-xs mt-1 text-center">ข้อมูลส่วนตัว</span>
+
+
+
+</div>
+
+
+
+<div class="step-line" id="line1-2"></div>
+
+
+
+<div class="flex flex-col items-center">
+
+
+
+<div id="step2-indicator" class="step-indicator step-pending">2</div>
+
+
+
+<span class="text-xs mt-1 text-center">เอกสาร</span>
+
+
+
+</div>
+
+
+
+<div class="step-line" id="line2-3"></div>
+
+
+
+<div class="flex flex-col items-center">
+
+
+
+<div id="step3-indicator" class="step-indicator step-pending">3</div>
+
+
+
+<span class="text-xs mt-1 text-center">สาขา</span>
+
+
+
+</div>
+
+
+
+<div class="step-line" id="line3-4"></div>
+
+
+
+<div class="flex flex-col items-center">
+
+
+
+<div id="step4-indicator" class="step-indicator step-pending">4</div>
+
+
+
+<span class="text-xs mt-1 text-center">ชำระเงิน</span>
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+<main>
+
+
+
+<!-- ขั้นที่ 1: ข้อมูลส่วนตัว -->
+
+
+
+<div id="step1" class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 mb-8">
+
+
+
+<h2 class="text-xl font-semibold mb-4">ขั้นที่ 1: ข้อมูลส่วนตัว</h2>
+
+
+
+<form id="personal-info-form" class="space-y-6">
+
+
+
+<!-- ส่วนข้อมูลส่วนบุคคล -->
+
+
+
+<div>
+
+
+
+<h3 class="section-title">ข้อมูลส่วนบุคคล</h3>
+
+
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+
+
+<div>
+
+
+
+<label for="prefix" class="form-label">คำนำหน้า <span class="text-red-500">*</span></label>
+
+
+
+<select id="prefix" name="prefix" class="form-input">
+
+
+
+<option value="">- เลือกคำนำหน้า -</option>
+
+
+
+<option value="นาย">นาย</option>
+
+
+
+<option value="นาง">นาง</option>
+
+
+
+<option value="นางสาว">นางสาว</option>
+
+
+
+<option value="other">อื่นๆ</option>
+
+
+
+</select>
+
+
+
+<div id="prefix-error" class="error-text hidden"></div>
+
+
+
+</div>
+
+
+
+<div id="other-prefix-container" class="hidden">
+
+
+
+<label for="other-prefix" class="form-label">ระบุคำนำหน้า <span class="text-red-500">*</span></label>
+
+
+
+<input type="text" id="other-prefix" name="other-prefix" class="form-input">
+
+
+
+</div>
+
+
+
+<div>
+
+
+
+<label for="firstname" class="form-label">ชื่อ <span class="text-red-500">*</span></label>
+
+
+
+<input type="text" id="firstname" name="firstname" class="form-input">
+
+
+
+<div id="firstname-error" class="error-text hidden"></div>
+
+
+
+</div>
+
+
+
+<div>
+
+
+
+<label for="lastname" class="form-label">นามสกุล <span class="text-red-500">*</span></label>
+
+
+
+<input type="text" id="lastname" name="lastname" class="form-input">
+
+
+
+<div id="lastname-error" class="error-text hidden"></div>
+
+
+
+</div>
+
+
+
+<div>
+
+
+
+<label for="id-card" class="form-label">เลขบัตรประจำตัวประชาชน <span class="text-red-500">*</span></label>
+
+
+
+<input type="text" id="id-card" name="id-card" class="form-input" maxlength="17" placeholder="X-XXXX-XXXXX-XX-X">
+
+
+
+<div id="id-card-error" class="error-text hidden"></div>
+
+
+
+</div>
+
+
+
+<div>
+
+
+
+<label for="birth-date" class="form-label">วันเดือนปีเกิด <span class="text-red-500">*</span></label>
+
+
+
+<input type="date" id="birth-date" name="birth-date" class="form-input">
+
+
+
+<div id="birth-date-error" class="error-text hidden"></div>
+
+
+
+</div>
+
+
+
+<div>
+
+
+
+<label for="gender" class="form-label">เพศ</label>
+
+
+
+<select id="gender" name="gender" class="form-input">
+
+
+
+<option value="">- เลือกเพศ -</option>
+
+
+
+<option value="male">ชาย</option>
+
+
+
+<option value="female">หญิง</option>
+
+
+
+<option value="other">อื่นๆ</option>
+
+
+
+<option value="not-specified">ไม่ระบุ</option>
+
+
+
+</select>
+
+
+
+</div>
+
+
+
+<div>
+
+
+
+<label for="nationality" class="form-label">สัญชาติ</label>
+
+
+
+<input type="text" id="nationality" name="nationality" class="form-input" value="ไทย">
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+<!-- ส่วนข้อมูลติดต่อ -->
+
+
+
+<div>
+
+
+
+<h3 class="section-title">ข้อมูลติดต่อ</h3>
+
+
+
+<div class="grid grid-cols-1 gap-4">
+
+
+
+<div>
+
+
+
+<label for="address" class="form-label">ที่อยู่ <span class="text-red-500">*</span></label>
+
+
+
+<textarea id="address" name="address" rows="3" class="form-input"></textarea>
+
+
+
+<div id="address-error" class="error-text hidden"></div>
+
+
+
+</div>
+
+
+
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+
+
+
+<div>
+
+
+
+<label for="province" class="form-label">จังหวัด <span class="text-red-500">*</span></label>
+
+
+
+<select id="province" name="province" class="form-input">
+
+
+
+<option value="">- เลือกจังหวัด -</option>
+
+
+
+<option value="กรุงเทพมหานคร">กรุงเทพมหานคร</option>
+
+
+
+<option value="กระบี่">กระบี่</option>
+
+
+
+<option value="กาญจนบุรี">กาญจนบุรี</option>
+
+
+
+<option value="กาฬสินธุ์">กาฬสินธุ์</option>
+
+
+
+<option value="กำแพงเพชร">กำแพงเพชร</option>
+
+
+
+<option value="ขอนแก่น">ขอนแก่น</option>
+
+
+
+<option value="จันทบุรี">จันทบุรี</option>
+
+
+
+<option value="ฉะเชิงเทรา">ฉะเชิงเทรา</option>
+
+
+
+<option value="ชลบุรี">ชลบุรี</option>
+
+
+
+<option value="ชัยนาท">ชัยนาท</option>
+
+
+
+<option value="ชัยภูมิ">ชัยภูมิ</option>
+
+
+
+<option value="ชุมพร">ชุมพร</option>
+
+
+
+<option value="เชียงราย">เชียงราย</option>
+
+
+
+<option value="เชียงใหม่">เชียงใหม่</option>
+
+
+
+<option value="ตรัง">ตรัง</option>
+
+
+
+<option value="ตราด">ตราด</option>
+
+
+
+<option value="ตาก">ตาก</option>
+
+
+
+<option value="นครนายก">นครนายก</option>
+
+
+
+<option value="นครปฐม">นครปฐม</option>
+
+
+
+<option value="นครพนม">นครพนม</option>
+
+
+
+<option value="นครราชสีมา">นครราชสีมา</option>
+
+
+
+</select>
+
+
+
+<div id="province-error" class="error-text hidden"></div>
+
+
+
+</div>
+
+
+
+<div>
+
+
+
+<label for="district" class="form-label">อำเภอ/เขต <span class="text-red-500">*</span></label>
+
+
+
+<input type="text" id="district" name="district" class="form-input">
+
+
+
+<div id="district-error" class="error-text hidden"></div>
+
+
+
+</div>
+
+
+
+<div>
+
+
+
+<label for="zip-code" class="form-label">รหัสไปรษณีย์ <span class="text-red-500">*</span></label>
+
+
+
+<input type="text" id="zip-code" name="zip-code" class="form-input" maxlength="5">
+
+
+
+<div id="zip-code-error" class="error-text hidden"></div>
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+
+
+<div>
+
+
+
+<label for="phone" class="form-label">เบอร์โทรศัพท์ <span class="text-red-500">*</span></label>
+
+
+
+<input type="tel" id="phone" name="phone" class="form-input" placeholder="0X-XXX-XXXX">
+
+
+
+<div id="phone-error" class="error-text hidden"></div>
+
+
+
+</div>
+
+
+
+<div>
+
+
+
+<label for="email" class="form-label">อีเมล</label>
+
+
+
+<input type="email" id="email" name="email" class="form-input">
+
+
+
+<div id="email-error" class="error-text hidden"></div>
+
+
+
+</div>
+
+
+
+<div>
+
+
+
+<label for="line-id" class="form-label">LINE ID</label>
+
+
+
+<input type="text" id="line-id" name="line-id" class="form-input">
+
+
+
+</div>
+
+
+
+<div>
+
+
+
+<label for="facebook" class="form-label">Facebook</label>
+
+
+
+<input type="text" id="facebook" name="facebook" class="form-input">
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+<!-- ส่วนข้อมูลอื่นๆ -->
+
+
+
+<div>
+
+
+
+<h3 class="section-title">ข้อมูลเพิ่มเติม</h3>
+
+
+
+<div class="space-y-4">
+
+
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+
+
+<div>
+
+
+
+<label for="occupation" class="form-label">อาชีพ</label>
+
+
+
+<input type="text" id="occupation" name="occupation" class="form-input">
+
+
+
+</div>
+
+
+
+<div>
+
+
+
+<label for="education" class="form-label">ระดับการศึกษา</label>
+
+
+
+<select id="education" name="education" class="form-input">
+
+
+
+<option value="">- เลือกระดับการศึกษา -</option>
+
+
+
+<option value="ต่ำกว่าประถมศึกษา">ต่ำกว่าประถมศึกษา</option>
+
+
+
+<option value="ประถมศึกษา">ประถมศึกษา</option>
+
+
+
+<option value="มัธยมศึกษาตอนต้น">มัธยมศึกษาตอนต้น</option>
+
+
+
+<option value="มัธยมศึกษาตอนปลาย">มัธยมศึกษาตอนปลาย</option>
+
+
+
+<option value="ปวช.">ปวช.</option>
+
+
+
+<option value="ปวส.">ปวส.</option>
+
+
+
+<option value="ปริญญาตรี">ปริญญาตรี</option>
+
+
+
+<option value="ปริญญาโท">ปริญญาโท</option>
+
+
+
+<option value="ปริญญาเอก">ปริญญาเอก</option>
+
+
+
+<option value="อื่นๆ">อื่นๆ</option>
+
+
+
+</select>
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+<div>
+
+
+
+<label for="reason" class="form-label">เหตุผลที่ต้องการเข้าร่วมพรรค</label>
+
+
+
+<textarea id="reason" name="reason" rows="3" class="form-input"></textarea>
+
+
+
+</div>
+
+
+
+<div>
+
+
+
+<label class="form-label">ท่านต้องการมีส่วนร่วมกับพรรคในระดับใด</label>
+
+
+
+<div class="grid grid-cols-1 md:grid-cols-3 gap-2 mt-2">
+
+
+
+<div class="flex items-center">
+
+
+
+<input id="participation-general" name="participation-level" type="radio" value="general" class="h-4 w-4 text-primary focus:ring-primary border-gray-300 dark:border-gray-700" checked>
+
+
+
+<label for="participation-general" class="ml-2 block text-sm text-gray-700 dark:text-gray-300">
+
+
+
+สมาชิกทั่วไป
+
+
+
+</label>
+
+
+
+</div>
+
+
+
+<div class="flex items-center">
+
+
+
+<input id="participation-volunteer" name="participation-level" type="radio" value="volunteer" class="h-4 w-4 text-primary focus:ring-primary border-gray-300 dark:border-gray-700">
+
+
+
+<label for="participation-volunteer" class="ml-2 block text-sm text-gray-700 dark:text-gray-300">
+
+
+
+อาสาสมัครช่วยงาน
+
+
+
+</label>
+
+
+
+</div>
+
+
+
+<div class="flex items-center">
+
+
+
+<input id="participation-committee" name="participation-level" type="radio" value="committee" class="h-4 w-4 text-primary focus:ring-primary border-gray-300 dark:border-gray-700">
+
+
+
+<label for="participation-committee" class="ml-2 block text-sm text-gray-700 dark:text-gray-300">
+
+
+
+กรรมการสาขา
+
+
+
+</label>
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+<div class="flex items-start">
+
+
+
+<div class="flex items-center h-5">
+
+
+
+<input id="accept-terms" name="accept-terms" type="checkbox" class="h-4 w-4 text-primary focus:ring-primary border-gray-300 dark:border-gray-700 rounded">
+
+
+
+</div>
+
+
+
+<div class="ml-3 text-sm">
+
+
+
+<label for="accept-terms" class="font-medium text-gray-700 dark:text-gray-300">ฉันยินยอมให้เก็บข้อมูลส่วนบุคคลตาม <a href="#" class="text-primary dark:text-primary-dark hover:underline">นโยบายความเป็นส่วนตัว</a></label>
+
+
+
+<div id="accept-terms-error" class="error-text hidden"></div>
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+<div class="pt-4 flex justify-end">
+
+
+
+<button type="submit" id="step1-next" class="btn-primary">ขั้นตอนถัดไป</button>
+
+
+
+</div>
+
+
+
+</form>
+
+
+
+</div>
+
+
+
+
+
+
+
+<!-- ขั้นที่ 2: อัพโหลดเอกสาร -->
+
+
+
+<div id="step2" class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 mb-8 hidden">
+
+
+
+<h2 class="text-xl font-semibold mb-4">ขั้นที่ 2: อัพโหลดเอกสาร</h2>
+
+
+
+<form id="document-form" class="space-y-6">
+
+
+
+<div>
+
+
+
+<p class="text-gray-700 dark:text-gray-300 mb-6">กรุณาอัพโหลดเอกสารสำคัญเพื่อยืนยันตัวตนของท่าน</p>
+
+
+
+
+
+<div class="space-y-6">
+
+
+
+<!-- อัพโหลดสำเนาบัตรประชาชน -->
+
+
+
+<div>
+
+
+
+<label class="form-label">สำเนาบัตรประชาชน <span class="text-red-500">*</span></label>
+
+
+
+<label for="id-card-file" class="file-upload-label">
+
+
+
+<div class="flex flex-col items-center justify-center pt-5 pb-6" id="id-card-upload-ui">
+
+
+
+<svg class="w-8 h-8 mb-3 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+
+
+
+<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+
+
+
+</svg>
+
+
+
+<p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">คลิกเพื่ออัพโหลด</span> หรือลากไฟล์มาวาง</p>
+
+
+
+<p class="text-xs text-gray-500 dark:text-gray-400">รองรับไฟล์ JPG, PNG หรือ PDF (ไม่เกิน 5MB)</p>
+
+
+
+</div>
+
+
+
+<div id="id-card-preview" class="hidden p-2 text-center">
+
+
+
+<img id="id-card-preview-img" src="" alt="ตัวอย่างเอกสาร" class="max-h-24 mx-auto mb-2 hidden">
+
+
+
+<p id="id-card-filename" class="text-sm text-gray-600 dark:text-gray-400 truncate max-w-xs mx-auto"></p>
+
+
+
+</div>
+
+
+
+<input id="id-card-file" name="id-card-file" type="file" class="hidden" accept=".jpg,.jpeg,.png,.pdf" />
+
+
+
+</label>
+
+
+
+<div id="id-card-file-error" class="error-text hidden"></div>
+
+
+
+</div>
+
+
+
+
+
+<!-- อัพโหลดทะเบียนบ้าน (ถ้ามี) -->
+
+
+
+<div>
+
+
+
+<label class="form-label">สำเนาทะเบียนบ้าน (ถ้ามี)</label>
+
+
+
+<label for="house-registration-file" class="file-upload-label">
+
+
+
+<div class="flex flex-col items-center justify-center pt-5 pb-6" id="house-reg-upload-ui">
+
+
+
+<svg class="w-8 h-8 mb-3 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+
+
+
+<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+
+
+
+</svg>
+
+
+
+<p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">คลิกเพื่ออัพโหลด</span> หรือลากไฟล์มาวาง</p>
+
+
+
+<p class="text-xs text-gray-500 dark:text-gray-400">รองรับไฟล์ JPG, PNG หรือ PDF (ไม่เกิน 5MB)</p>
+
+
+
+</div>
+
+
+
+<div id="house-reg-preview" class="hidden p-2 text-center">
+
+
+
+<img id="house-reg-preview-img" src="" alt="ตัวอย่างเอกสาร" class="max-h-24 mx-auto mb-2 hidden">
+
+
+
+<p id="house-reg-filename" class="text-sm text-gray-600 dark:text-gray-400 truncate max-w-xs mx-auto"></p>
+
+
+
+</div>
+
+
+
+<input id="house-registration-file" name="house-registration-file" type="file" class="hidden" accept=".jpg,.jpeg,.png,.pdf" />
+
+
+
+</label>
+
+
+
+</div>
+
+
+
+
+
+<!-- อัพโหลดรูปถ่าย -->
+
+
+
+<div>
+
+
+
+<label class="form-label">รูปถ่ายของท่าน <span class="text-red-500">*</span></label>
+
+
+
+<label for="photo-file" class="file-upload-label">
+
+
+
+<div class="flex flex-col items-center justify-center pt-5 pb-6" id="photo-upload-ui">
+
+
+
+<svg class="w-8 h-8 mb-3 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+
+
+
+<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+
+
+
+</svg>
+
+
+
+<p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">คลิกเพื่ออัพโหลด</span> หรือลากไฟล์มาวาง</p>
+
+
+
+<p class="text-xs text-gray-500 dark:text-gray-400">รองรับไฟล์ JPG หรือ PNG (ไม่เกิน 2MB)</p>
+
+
+
+</div>
+
+
+
+<div id="photo-preview" class="hidden p-2 text-center">
+
+
+
+<img id="photo-preview-img" src="" alt="รูปถ่าย" class="max-h-24 mx-auto mb-2 hidden">
+
+
+
+<p id="photo-filename" class="text-sm text-gray-600 dark:text-gray-400 truncate max-w-xs mx-auto"></p>
+
+
+
+</div>
+
+
+
+<input id="photo-file" name="photo-file" type="file" class="hidden" accept=".jpg,.jpeg,.png" />
+
+
+
+</label>
+
+
+
+<div id="photo-file-error" class="error-text hidden"></div>
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+<div class="pt-4 flex justify-between">
+
+
+
+<button type="button" id="step2-back" class="btn-secondary">ย้อนกลับ</button>
+
+
+
+<button type="submit" id="step2-next" class="btn-primary">ขั้นตอนถัดไป</button>
+
+
+
+</div>
+
+
+
+</form>
+
+
+
+</div>
+
+
+
+
+
+
+
+<!-- ขั้นที่ 3: เลือกสาขา -->
+
+
+
+<div id="step3" class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 mb-8 hidden">
+
+
+
+<h2 class="text-xl font-semibold mb-4">ขั้นที่ 3: เลือกสาขาพรรค</h2>
+
+
+
+<form id="branch-form" class="space-y-6">
+
+
+
+<div>
+
+
+
+<p class="text-gray-700 dark:text-gray-300 mb-4">เลือกสาขาพรรคที่ท่านต้องการสังกัด</p>
+
+
+
+
+
+<div class="mb-4">
+
+
+
+<input type="text" id="branch-search" placeholder="ค้นหาสาขา..." class="form-input">
+
+
+
+</div>
+
+
+
+
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+
+
+
+<!-- สาขาพรรค (รายการจะถูกเพิ่มแบบไดนามิกจาก JS) -->
+
+
+
+<div id="branches-container" class="space-y-3 col-span-1 md:col-span-2">
+
+
+
+<!-- จะถูกเติมโดย JavaScript -->
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+<div id="branch-error" class="error-text hidden mt-4 text-center"></div>
+
+
+
+</div>
+
+
+
+
+
+
+
+<div class="pt-4 flex justify-between">
+
+
+
+<button type="button" id="step3-back" class="btn-secondary">ย้อนกลับ</button>
+
+
+
+<button type="submit" id="step3-next" class="btn-primary">ขั้นตอนถัดไป</button>
+
+
+
+</div>
+
+
+
+</form>
+
+</div>
+
+
+
+
+
+
+
+<!-- ขั้นที่ 4: ชำระค่าสมาชิก -->
+
+
+
+<div id="step4" class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 mb-8 hidden">
+
+
+
+<h2 class="text-xl font-semibold mb-4">ขั้นที่ 4: ชำระค่าสมาชิก</h2>
+
+
+
+<form id="payment-form" class="space-y-6">
+
+
+
+<div>
+
+
+
+<div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg mb-6">
+
+
+
+<h3 class="font-semibold mb-2">รายละเอียดค่าสมาชิก</h3>
+
+
+
+<div class="flex justify-between mb-2">
+
+
+
+<span>ค่าสมัครสมาชิกพรรค</span>
+
+
+
+<span>100 บาท</span>
+
+
+
+</div>
+
+
+
+<div class="flex justify-between font-semibold pt-2 border-t border-gray-200 dark:border-gray-600">
+
+
+
+<span>รวมทั้งสิ้น</span>
+
+
+
+<span>100 บาท</span>
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+<h3 class="section-title">วิธีการชำระเงิน</h3>
+
+
+
+<div class="space-y-4">
+
+
+
+<div id="payment-options" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+
+
+<div class="payment-option" data-payment="bank-transfer">
+
+
+
+<div class="flex items-center">
+
+
+
+<input type="radio" id="payment-bank" name="payment-method" value="bank-transfer" class="h-4 w-4 text-primary focus:ring-primary border-gray-300 dark:border-gray-700" checked>
+
+
+
+<label for="payment-bank" class="ml-2 block text-base font-medium text-gray-700 dark:text-gray-300">
+
+
+
+โอนเงินผ่านธนาคาร
+
+
+
+</label>
+
+
+
+</div>
+
+
+
+<p class="text-sm text-gray-500 dark:text-gray-400 mt-2">โอนเงินไปยังบัญชีพรรคโดยตรง</p>
+
+
+
+</div>
+
+
+
+<div class="payment-option" data-payment="qr-code">
+
+
+
+<div class="flex items-center">
+
+
+
+<input type="radio" id="payment-qr" name="payment-method" value="qr-code" class="h-4 w-4 text-primary focus:ring-primary border-gray-300 dark:border-gray-700">
+
+
+
+<label for="payment-qr" class="ml-2 block text-base font-medium text-gray-700 dark:text-gray-300">
+
+
+
+สแกน QR Code
+
+
+
+</label>
+
+
+
+</div>
+
+
+
+<p class="text-sm text-gray-500 dark:text-gray-400 mt-2">สแกน QR Code เพื่อชำระเงินทันที</p>
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+<!-- รายละเอียดการโอนเงิน -->
+
+
+
+<div id="bank-transfer-details" class="pt-4">
+
+
+
+<div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+
+
+
+<h4 class="font-semibold mb-2">ข้อมูลการโอนเงิน</h4>
+
+
+
+<ul class="space-y-2 text-gray-700 dark:text-gray-300">
+
+
+
+<li>ธนาคารกสิกรไทย</li>
+
+
+
+<li>บัญชีออมทรัพย์ เลขที่: 123-4-56789-0</li>
+
+
+
+<li>ชื่อบัญชี: พรรคการเมืองใหม่</li>
+
+
+
+</ul>
+
+
+
+
+
+<div class="mt-4">
+
+
+
+<label class="form-label">อัพโหลดหลักฐานการโอนเงิน <span class="text-red-500">*</span></label>
+
+
+
+<label for="payment-slip" class="file-upload-label">
+
+
+
+<div class="flex flex-col items-center justify-center pt-5 pb-6" id="payment-slip-upload-ui">
+
+
+
+<svg class="w-8 h-8 mb-3 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+
+
+
+<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+
+
+
+</svg>
+
+
+
+<p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">คลิกเพื่ออัพโหลด</span> หรือลากไฟล์มาวาง</p>
+
+
+
+<p class="text-xs text-gray-500 dark:text-gray-400">รองรับไฟล์ JPG หรือ PNG (ไม่เกิน 2MB)</p>
+
+
+
+</div>
+
+
+
+<div id="payment-slip-preview" class="hidden p-2 text-center">
+
+
+
+<img id="payment-slip-preview-img" src="" alt="หลักฐานการโอน" class="max-h-24 mx-auto mb-2 hidden">
+
+
+
+<p id="payment-slip-filename" class="text-sm text-gray-600 dark:text-gray-400 truncate max-w-xs mx-auto"></p>
+
+
+
+</div>
+
+
+
+<input id="payment-slip" name="payment-slip" type="file" class="hidden" accept=".jpg,.jpeg,.png" />
+
+
+
+</label>
+
+
+
+<div id="payment-slip-error" class="error-text hidden"></div>
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+<!-- QR Code -->
+
+
+
+<div id="qr-code-payment" class="pt-4 hidden">
+
+
+
+<div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg text-center">
+
+
+
+<h4 class="font-semibold mb-4">สแกน QR Code เพื่อชำระเงิน</h4>
+
+
+
+
+
+<div class="bg-white p-4 inline-block rounded-md mx-auto mb-4">
+
+
+
+<!-- สร้าง QR Code ด้วย Canvas -->
+
+
+
+<canvas id="qrcode-canvas" width="200" height="200" class="mx-auto"></canvas>
+
+
+
+</div>
+
+
+
+
+
+<p class="text-sm text-gray-700 dark:text-gray-300">สแกนเพื่อชำระค่าสมาชิก 100 บาท</p>
+
+
+
+<p class="text-xs text-gray-500 dark:text-gray-400 mt-2">หมายเหตุ: หลังจากชำระเงินแล้ว กรุณารอสักครู่ ระบบจะตรวจสอบโดยอัตโนมัติ</p>
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+<div class="pt-4 flex justify-between">
+
+
+
+<button type="button" id="step4-back" class="btn-secondary">ย้อนกลับ</button>
+
+
+
+<button type="submit" id="submit-all" class="btn-primary">ยืนยันการสมัคร</button>
+
+
+
+</div>
+
+
+
+</form>
+
+
+
+</div>
+
+
+
+
+
+
+
+<!-- หน้าแสดงผลสำเร็จ -->
+
+
+
+<div id="success-container" class="hidden bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 text-center">
+
+
+
+<div class="mb-4 text-green-500 dark:text-green-400">
+
+
+
+<svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+
+
+
+<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+
+
+
+</svg>
+
+
+
+</div>
+
+
+
+<h2 class="text-2xl font-bold mb-2">สมัครสมาชิกสำเร็จ!</h2>
+
+
+
+<p class="text-gray-600 dark:text-gray-400 mb-6">ขอบคุณที่สมัครเป็นสมาชิกพรรคของเรา เราจะดำเนินการตรวจสอบข้อมูลและติดต่อกลับภายใน 3-5 วันทำการ</p>
+
+
+
+
+
+<div class="bg-primary/10 dark:bg-primary-dark/10 p-4 rounded-lg mb-6 inline-block">
+
+
+
+<p class="text-primary dark:text-primary-dark text-xl font-bold">
+
+
+
+รหัสสมาชิก: <span id="member-id">xxxxxx</span>
+
+
+
+</p>
+
+
+
+</div>
+
+
+
+
+
+<div id="member-details" class="text-left bg-gray-50 dark:bg-gray-700 p-4 rounded-lg mb-6">
+
+
+
+<!-- ข้อมูลสมาชิกจะถูกแสดงที่นี่ -->
+
+
+
+</div>
+
+
+
+
+
+<div class="space-x-4">
+
+
+
+<button id="download-receipt" class="btn-secondary">พิมพ์ใบสมัคร</button>
+
+
+
+<button id="go-home" class="btn-primary">กลับสู่หน้าหลัก</button>
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+<!-- ส่วนโหลด -->
+
+
+
+<div id="loading-container" class="hidden">
+
+
+
+<div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+
+
+
+<div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg max-w-md w-full mx-4">
+
+
+
+<div class="flex justify-center mb-4">
+
+
+
+<svg class="animate-spin h-10 w-10 text-primary dark:text-primary-dark" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+
+
+
+<circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+
+
+
+<path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+
+
+
+</svg>
+
+
+
+</div>
+
+
+
+<p class="text-center text-gray-700 dark:text-gray-300" id="loading-text">กำลังดำเนินการ...</p>
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+</main>
+
+
+
+</div>
+
+
+
+
+
+
+
+<script>
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+
+
+
+// ----------------------
+
+
+
+// ตัวแปรและค่าเริ่มต้น
+
+
+
+// ----------------------
+
+
+
+const step1 = document.getElementById('step1');
+
+
+
+const step2 = document.getElementById('step2');
+
+
+
+const step3 = document.getElementById('step3');
+
+
+
+const step4 = document.getElementById('step4');
+
+
+
+const successContainer = document.getElementById('success-container');
+
+
+
+const loadingContainer = document.getElementById('loading-container');
+
+
+
+const loadingText = document.getElementById('loading-text');
+
+
+
+
+
+const step1Indicator = document.getElementById('step1-indicator');
+
+
+
+const step2Indicator = document.getElementById('step2-indicator');
+
+
+
+const step3Indicator = document.getElementById('step3-indicator');
+
+
+
+const step4Indicator = document.getElementById('step4-indicator');
+
+
+
+
+
+const line1To2 = document.getElementById('line1-2');
+
+
+
+const line2To3 = document.getElementById('line2-3');
+
+
+
+const line3To4 = document.getElementById('line3-4');
+
+
+
+
+
+const prefixSelect = document.getElementById('prefix');
+
+
+
+const otherPrefixContainer = document.getElementById('other-prefix-container');
+
+
+
+
+
+// สถานะการกรอกข้อมูล
+
+
+
+const formData = {
+
+
+
+personalInfo: {},
+
+
+
+documents: {},
+
+
+
+branch: null,
+
+
+
+payment: {}
+
+
+
+};
+
+
+
+
+
+// ----------------------
+
+
+
+// ฟังก์ชัน Utilities
+
+
+
+// ----------------------
+
+
+
+
+
+// ฟังก์ชันตรวจสอบเลขบัตรประชาชน
+
+
+
+function validateIdCard(id) {
+
+
+
+id = id.replace(/[^0-9]/g, '');
+
+
+
+if (!/^[0-9]{13}$/.test(id)) return false;
+
+
+
+
+
+let sum = 0;
+
+
+
+for (let i = 0; i < 12; i++) {
+
+
+
+sum += parseInt(id.charAt(i)) * (13 - i);
+
+
+
+}
+
+
+
+let mod = (11 - sum % 11) % 10;
+
+
+
+return mod === parseInt(id.charAt(12));
+
+
+
+}
+
+
+
+
+
+// ฟังก์ชันแสดงข้อความ error
+
+
+
+function showError(elementId, message) {
+
+
+
+const errorElement = document.getElementById(elementId + '-error');
+
+
+
+if (errorElement) {
+
+
+
+errorElement.textContent = message;
+
+
+
+errorElement.classList.remove('hidden');
+
+
+
+
+
+// ไฮไลท์ฟิลด์ที่ error
+
+
+
+const field = document.getElementById(elementId);
+
+
+
+if (field) {
+
+
+
+field.classList.add('border-red-500');
+
+
+
+field.classList.add('ring-1');
+
+
+
+field.classList.add('ring-red-500');
+
+
+
+}
+
+
+
+}
+
+
+
+}
+
+
+
+
+
+// ฟังก์ชันซ่อนข้อความ error
+
+
+
+function hideError(elementId) {
+
+
+
+const errorElement = document.getElementById(elementId + '-error');
+
+
+
+if (errorElement) {
+
+
+
+errorElement.textContent = '';
+
+
+
+errorElement.classList.add('hidden');
+
+
+
+
+
+// ลบไฮไลท์ error
+
+
+
+const field = document.getElementById(elementId);
+
+
+
+if (field) {
+
+
+
+field.classList.remove('border-red-500');
+
+
+
+field.classList.remove('ring-1');
+
+
+
+field.classList.remove('ring-red-500');
+
+
+
+}
+
+
+
+}
+
+
+
+}
+
+
+
+
+
+// ฟังก์ชันเปลี่ยนขั้นตอน
+
+
+
+function goToStep(step) {
+
+
+
+[step1, step2, step3, step4, successContainer].forEach(s => s.classList.add('hidden'));
+
+
+
+
+
+switch(step) {
+
+
+
+case 1:
+
+
+
+step1.classList.remove('hidden');
+
+
+
+step1Indicator.classList.add('step-active');
+
+
+
+step1Indicator.classList.remove('step-completed', 'step-pending');
+
+
+
+step2Indicator.classList.add('step-pending');
+
+
+
+step2Indicator.classList.remove('step-active', 'step-completed');
+
+
+
+line1To2.classList.add('step-line-pending');
+
+
+
+line1To2.classList.remove('step-line-active', 'step-line-completed');
+
+
+
+break;
+
+
+
+case 2:
+
+
+
+step2.classList.remove('hidden');
+
+
+
+step1Indicator.classList.add('step-completed');
+
+
+
+step1Indicator.classList.remove('step-active', 'step-pending');
+
+
+
+step2Indicator.classList.add('step-active');
+
+
+
+step2Indicator.classList.remove('step-completed', 'step-pending');
+
+
+
+step3Indicator.classList.add('step-pending');
+
+
+
+step3Indicator.classList.remove('step-active', 'step-completed');
+
+
+
+line1To2.classList.add('step-line-completed');
+
+
+
+line1To2.classList.remove('step-line-pending', 'step-line-active');
+
+
+
+line2To3.classList.add('step-line-pending');
+
+
+
+line2To3.classList.remove('step-line-active', 'step-line-completed');
+
+
+
+break;
+
+
+
+case 3:
+
+
+
+step3.classList.remove('hidden');
+
+
+
+step2Indicator.classList.add('step-completed');
+
+
+
+step2Indicator.classList.remove('step-active', 'step-pending');
+
+
+
+step3Indicator.classList.add('step-active');
+
+
+
+step3Indicator.classList.remove('step-completed', 'step-pending');
+
+
+
+step4Indicator.classList.add('step-pending');
+
+
+
+step4Indicator.classList.remove('step-active', 'step-completed');
+
+
+
+line2To3.classList.add('step-line-completed');
+
+
+
+line2To3.classList.remove('step-line-pending', 'step-line-active');
+
+
+
+line3To4.classList.add('step-line-pending');
+
+
+
+line3To4.classList.remove('step-line-active', 'step-line-completed');
+
+
+
+break;
+
+
+
+case 4:
+
+
+
+step4.classList.remove('hidden');
+
+
+
+step3Indicator.classList.add('step-completed');
+
+
+
+step3Indicator.classList.remove('step-active', 'step-pending');
+
+
+
+step4Indicator.classList.add('step-active');
+
+
+
+step4Indicator.classList.remove('step-completed', 'step-pending');
+
+
+
+line3To4.classList.add('step-line-completed');
+
+
+
+line3To4.classList.remove('step-line-pending', 'step-line-active');
+
+
+
+break;
+
+
+
+case 5: // success
+
+
+
+successContainer.classList.remove('hidden');
+
+
+
+step4Indicator.classList.add('step-completed');
+
+
+
+step4Indicator.classList.remove('step-active', 'step-pending');
+
+
+
+break;
+
+
+
+}
+
+
+
+
+
+window.scrollTo({ top: 0, behavior: 'smooth' });
+
+
+
+}
+
+
+
+
+
+// สร้าง QR Code พื้นฐาน (โดยไม่ใช้ library ภายนอก)
+
+
+
+function drawBasicQRCode() {
+
+
+
+const canvas = document.getElementById('qrcode-canvas');
+
+
+
+if (canvas.getContext) {
+
+
+
+const ctx = canvas.getContext('2d');
+
+
+
+const width = canvas.width;
+
+
+
+const height = canvas.height;
+
+
+
+
+
+// วาดพื้นหลัง
+
+
+
+ctx.fillStyle = 'white';
+
+
+
+ctx.fillRect(0, 0, width, height);
+
+
+
+
+
+// วาดเส้นขอบ
+
+
+
+ctx.strokeStyle = '#000';
+
+
+
+ctx.lineWidth = 2;
+
+
+
+ctx.strokeRect(2, 2, width-4, height-4);
+
+
+
+
+
+// วาดจุดมุม QR code
+
+
+
+const drawCornerSquare = (x, y, size) => {
+
+
+
+ctx.fillStyle = '#000';
+
+
+
+ctx.fillRect(x, y, size, size);
+
+
+
+ctx.fillStyle = '#fff';
+
+
+
+ctx.fillRect(x+10, y+10, size-20, size-20);
+
+
+
+ctx.fillStyle = '#000';
+
+
+
+ctx.fillRect(x+20, y+20, size-40, size-40);
+
+
+
+};
+
+
+
+
+
+// วาดจุดมุม
+
+
+
+drawCornerSquare(20, 20, 60);
+
+
+
+drawCornerSquare(width-80, 20, 60);
+
+
+
+drawCornerSquare(20, height-80, 60);
+
+
+
+
+
+// วาดลวดลาย QR code แบบจำลอง
+
+
+
+ctx.fillStyle = '#000';
+
+
+
+
+
+// สร้างช่องสี่เหลี่ยมเล็กเพื่อจำลอง QR Code
+
+
+
+const grid = 12;
+
+
+
+const blockSize = (width - 40) / grid;
+
+
+
+
+
+for (let i = 0; i < grid; i++) {
+
+
+
+for (let j = 0; j < grid; j++) {
+
+
+
+// สุ่มการแสดงช่อง (เพื่อให้ดูเหมือน QR code จริง)
+
+
+
+if (
+
+
+
+// เว้นพื้นที่มุมไว้สำหรับสี่เหลี่ยมมุม
+
+
+
+!((i < 3 && j < 3) || (i < 3 && j > grid-4) || (i > grid-4 && j < 3)) &&
+
+
+
+Math.random() > 0.6
+
+
+
+) {
+
+
+
+ctx.fillRect(20 + i * blockSize, 20 + j * blockSize, blockSize, blockSize);
+
+
+
+}
+
+
+
+}
+
+
+
+}
+
+
+
+
+
+// วาดข้อความกลาง QR Code
+
+
+
+ctx.fillStyle = '#fff';
+
+
+
+ctx.fillRect(width/2 - 25, height/2 - 25, 50, 50);
+
+
+
+ctx.fillStyle = '#000';
+
+
+
+ctx.font = 'bold 14px sans-serif';
+
+
+
+ctx.textAlign = 'center';
+
+
+
+ctx.textBaseline = 'middle';
+
+
+
+ctx.fillText('SCAN', width/2, height/2 - 8);
+
+
+
+ctx.fillText('ME', width/2, height/2 + 8);
+
+
+
+}
+
+
+
+}
+
+
+
+
+
+// ----------------------
+
+
+
+// ข้อมูลสาขาพรรค (จำลอง)
+
+
+
+// ----------------------
+
+
+
+const partyBranches = [
+
+
+
+{ id: 1, name: 'สาขากรุงเทพมหานคร', address: 'เขตปทุมวัน กรุงเทพฯ', members: 540 },
+
+
+
+{ id: 2, name: 'สาขาเชียงใหม่', address: 'อ.เมือง จ.เชียงใหม่', members: 315 },
+
+
+
+{ id: 3, name: 'สาขาขอนแก่น', address: 'อ.เมือง จ.ขอนแก่น', members: 210 },
+
+
+
+{ id: 4, name: 'สาขาชลบุรี', address: 'เมืองพัทยา จ.ชลบุรี', members: 258 },
+
+
+
+{ id: 5, name: 'สาขาภูเก็ต', address: 'อ.เมือง จ.ภูเก็ต', members: 187 },
+
+
+
+{ id: 6, name: 'สาขานครราชสีมา', address: 'อ.เมือง จ.นครราชสีมา', members: 203 },
+
+
+
+{ id: 7, name: 'สาขาอุบลราชธานี', address: 'อ.เมือง จ.อุบลราชธานี', members: 152 },
+
+
+
+{ id: 8, name: 'สาขาสงขลา', address: 'อ.หาดใหญ่ จ.สงขลา', members: 173 }
+
+
+
+];
+
+
+
+
+
+// ----------------------
+
+
+
+// Event Listeners
+
+
+
+// ----------------------
+
+
+
+
+
+// แสดงช่องกรอกคำนำหน้าอื่นๆ เมื่อเลือก "อื่นๆ"
+
+
+
+prefixSelect.addEventListener('change', function() {
+
+
+
+if (this.value === 'other') {
+
+
+
+otherPrefixContainer.classList.remove('hidden');
+
+
+
+} else {
+
+
+
+otherPrefixContainer.classList.add('hidden');
+
+
+
+}
+
+
+
+});
+
+
+
+
+
+// ฟอร์มแสดง/ซ่อนตามวิธีการชำระเงิน
+
+
+
+document.querySelectorAll('input[name="payment-method"]').forEach(input => {
+
+
+
+input.addEventListener('change', function() {
+
+
+
+const bankTransferDetails = document.getElementById('bank-transfer-details');
+
+
+
+const qrCodePayment = document.getElementById('qr-code-payment');
+
+
+
+
+
+document.querySelectorAll('.payment-option').forEach(option => {
+
+
+
+option.classList.remove('selected');
+
+
+
+});
+
+
+
+
+
+const selectedOption = document.querySelector(`.payment-option[data-payment="${this.value}"]`);
+
+
+
+if (selectedOption) {
+
+
+
+selectedOption.classList.add('selected');
+
+
+
+}
+
+
+
+
+
+if (this.value === 'bank-transfer') {
+
+
+
+bankTransferDetails.classList.remove('hidden');
+
+
+
+qrCodePayment.classList.add('hidden');
+
+
+
+} else if (this.value === 'qr-code') {
+
+
+
+bankTransferDetails.classList.add('hidden');
+
+
+
+qrCodePayment.classList.remove('hidden');
+
+
+
+drawBasicQRCode();
+
+
+
+}
+
+
+
+});
+
+
+
+});
+
+
+
+
+
+// ฟอร์มเมต เลขบัตรประชาชน
+
+
+
+document.getElementById('id-card').addEventListener('input', function(e) {
+
+
+
+let value = e.target.value.replace(/[^0-9]/g, '');
+
+
+
+if (value.length > 13) value = value.substring(0, 13);
+
+
+
+
+
+let formatted = '';
+
+
+
+if (value.length > 0) formatted += value.substring(0, 1);
+
+
+
+if (value.length > 1) formatted += '-' + value.substring(1, 5);
+
+
+
+if (value.length > 5) formatted += '-' + value.substring(5, 10);
+
+
+
+if (value.length > 10) formatted += '-' + value.substring(10, 12);
+
+
+
+if (value.length > 12) formatted += '-' + value.substring(12, 13);
+
+
+
+
+
+e.target.value = formatted;
+
+
+
+});
+
+
+
+
+
+
+
+// ฟอร์มเมต เบอร์โทรศัพท์
+
+
+
+document.getElementById('phone').addEventListener('input', function(e) {
+
+
+
+let value = e.target.value.replace(/[^0-9]/g, '');
+
+
+
+if (value.length > 10) value = value.substring(0, 10);
+
+
+
+
+
+let formatted = '';
+
+
+
+if (value.length > 0) formatted += value.substring(0, 3);
+
+
+
+if (value.length > 3) formatted += '-' + value.substring(3, 6);
+
+
+
+if (value.length > 6) formatted += '-' + value.substring(6, 10);
+
+
+
+
+
+e.target.value = formatted;
+
+
+
+});
+
+
+
+
+
+// การจัดการอัพโหลดไฟล์
+
+
+
+function setupFileUpload(fileInputId, previewId, previewImgId, filenameId, uploadUiId) {
+
+
+
+const fileInput = document.getElementById(fileInputId);
+
+
+
+const preview = document.getElementById(previewId);
+
+
+
+const previewImg = document.getElementById(previewImgId);
+
+
+
+const filename = document.getElementById(filenameId);
+
+
+
+const uploadUi = document.getElementById(uploadUiId);
+
+
+
+
+
+fileInput.addEventListener('change', function() {
+
+
+
+if (this.files && this.files[0]) {
+
+
+
+const file = this.files[0];
+
+
+
+
+
+// ตรวจสอบขนาดไฟล์ (max 5MB)
+
+
+
+if (file.size > 5 * 1024 * 1024) {
+
+
+
+alert('ไฟล์มีขนาดใหญ่เกินไป กรุณาอัพโหลดไฟล์ขนาดไม่เกิน 5MB');
+
+
+
+this.value = '';
+
+
+
+return;
+
+
+
+}
+
+
+
+
+
+filename.textContent = file.name;
+
+
+
+
+
+// แสดงตัวอย่างภาพ (ถ้าเป็นไฟล์รูปภาพ)
+
+
+
+if (file.type.includes('image')) {
+
+
+
+const reader = new FileReader();
+
+
+
+reader.onload = function(e) {
+
+
+
+previewImg.src = e.target.result;
+
+
+
+previewImg.classList.remove('hidden');
+
+
+
+}
+
+
+
+reader.readAsDataURL(file);
+
+
+
+} else {
+
+
+
+previewImg.classList.add('hidden');
+
+
+
+}
+
+
+
+
+
+uploadUi.classList.add('hidden');
+
+
+
+preview.classList.remove('hidden');
+
+
+
+
+
+// ซ่อนข้อความ error ถ้ามี
+
+
+
+hideError(fileInputId);
+
+
+
+}
+
+
+
+});
+
+
+
+
+
+// การคลิกที่ preview เพื่อเปลี่ยนไฟล์
+
+
+
+preview.addEventListener('click', function(e) {
+
+
+
+e.preventDefault();
+
+
+
+fileInput.click();
+
+
+
+});
+
+
+
+}
+
+
+
+
+
+// ตั้งค่าการอัพโหลดไฟล์
+
+
+
+setupFileUpload('id-card-file', 'id-card-preview', 'id-card-preview-img', 'id-card-filename', 'id-card-upload-ui');
+
+
+
+setupFileUpload('house-registration-file', 'house-reg-preview', 'house-reg-preview-img', 'house-reg-filename', 'house-reg-upload-ui');
+
+
+
+setupFileUpload('photo-file', 'photo-preview', 'photo-preview-img', 'photo-filename', 'photo-upload-ui');
+
+
+
+setupFileUpload('payment-slip', 'payment-slip-preview', 'payment-slip-preview-img', 'payment-slip-filename', 'payment-slip-upload-ui');
+
+
+
+
+
+// ----------------------
+
+
+
+// ตรวจสอบฟอร์ม
+
+
+
+// ----------------------
+
+
+
+
+
+// ตรวจสอบฟอร์มข้อมูลส่วนตัว
+
+
+
+function validatePersonalInfoForm() {
+
+
+
+let isValid = true;
+
+
+
+
+
+// ล้างข้อความเตือนเดิม
+
+
+
+document.querySelectorAll('#step1 .error-text').forEach(el => {
+
+
+
+el.classList.add('hidden');
+
+
+
+el.textContent = '';
+
+
+
+});
+
+
+
+
+
+// ตรวจสอบคำนำหน้า
+
+
+
+if (!prefixSelect.value) {
+
+
+
+showError('prefix', 'กรุณาเลือกคำนำหน้า');
+
+
+
+isValid = false;
+
+
+
+}
+
+
+
+
+
+// ตรวจสอบชื่อ
+
+
+
+if (!document.getElementById('firstname').value.trim()) {
+
+
+
+showError('firstname', 'กรุณากรอกชื่อ');
+
+
+
+isValid = false;
+
+
+
+}
+
+
+
+
+
+// ตรวจสอบนามสกุล
+
+
+
+if (!document.getElementById('lastname').value.trim()) {
+
+
+
+showError('lastname', 'กรุณากรอกนามสกุล');
+
+
+
+isValid = false;
+
+
+
+}
+
+
+
+
+
+// ตรวจสอบเลขบัตรประชาชน
+
+
+
+const idCard = document.getElementById('id-card').value.replace(/[^0-9]/g, '');
+
+
+
+if (!idCard) {
+
+
+
+showError('id-card', 'กรุณากรอกเลขบัตรประชาชน');
+
+
+
+isValid = false;
+
+
+
+} else if (!validateIdCard(idCard)) {
+
+
+
+showError('id-card', 'เลขบัตรประชาชนไม่ถูกต้อง');
+
+
+
+isValid = false;
+
+
+
+}
+
+
+
+
+
+// ตรวจสอบวันเกิด
+
+
+
+if (!document.getElementById('birth-date').value) {
+
+
+
+showError('birth-date', 'กรุณาระบุวันเกิด');
+
+
+
+isValid = false;
+
+
+
+}
+
+
+
+
+
+// ตรวจสอบที่อยู่
+
+
+
+if (!document.getElementById('address').value.trim()) {
+
+
+
+showError('address', 'กรุณากรอกที่อยู่');
+
+
+
+isValid = false;
+
+
+
+}
+
+
+
+
+
+// ตรวจสอบจังหวัด
+
+
+
+if (!document.getElementById('province').value) {
+
+
+
+showError('province', 'กรุณาเลือกจังหวัด');
+
+
+
+isValid = false;
+
+
+
+}
+
+
+
+
+
+// ตรวจสอบอำเภอ/เขต
+
+
+
+if (!document.getElementById('district').value.trim()) {
+
+
+
+showError('district', 'กรุณากรอกอำเภอ/เขต');
+
+
+
+isValid = false;
+
+
+
+}
+
+
+
+
+
+// ตรวจสอบรหัสไปรษณีย์
+
+
+
+const zipCode = document.getElementById('zip-code').value.trim();
+
+
+
+if (!zipCode) {
+
+
+
+showError('zip-code', 'กรุณากรอกรหัสไปรษณีย์');
+
+
+
+isValid = false;
+
+
+
+} else if (!/^[0-9]{5}$/.test(zipCode)) {
+
+
+
+showError('zip-code', 'รหัสไปรษณีย์ต้องเป็นตัวเลข 5 หลัก');
+
+
+
+isValid = false;
+
+
+
+}
+
+
+
+
+
+// ตรวจสอบเบอร์โทรศัพท์
+
+
+
+const phone = document.getElementById('phone').value.replace(/[^0-9]/g, '');
+
+
+
+if (!phone) {
+
+
+
+showError('phone', 'กรุณากรอกเบอร์โทรศัพท์');
+
+
+
+isValid = false;
+
+
+
+} else if (!/^0[0-9]{8,9}$/.test(phone)) {
+
+
+
+showError('phone', 'เบอร์โทรศัพท์ไม่ถูกต้อง');
+
+
+
+isValid = false;
+
+
+
+}
+
+
+
+
+
+// ตรวจสอบอีเมล (ถ้ามีการกรอก)
+
+
+
+const email = document.getElementById('email').value.trim();
+
+
+
+if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+
+
+
+showError('email', 'รูปแบบอีเมลไม่ถูกต้อง');
+
+
+
+isValid = false;
+
+
+
+}
+
+
+
+
+
+// ตรวจสอบการยอมรับเงื่อนไข
+
+
+
+if (!document.getElementById('accept-terms').checked) {
+
+
+
+showError('accept-terms', 'กรุณายอมรับเงื่อนไข');
+
+
+
+isValid = false;
+
+
+
+}
+
+
+
+
+
+return isValid;
+
+
+
+}
+
+
+
+
+
+// ตรวจสอบฟอร์มเอกสาร
+
+
+
+function validateDocumentsForm() {
+
+
+
+let isValid = true;
+
+
+
+
+
+// ล้างข้อความเตือนเดิม
+
+
+
+document.querySelectorAll('#step2 .error-text').forEach(el => {
+
+
+
+el.classList.add('hidden');
+
+
+
+el.textContent = '';
+
+
+
+});
+
+
+
+
+
+// ตรวจสอบสำเนาบัตรประชาชน
+
+
+
+if (!document.getElementById('id-card-file').files.length) {
+
+
+
+showError('id-card-file', 'กรุณาอัพโหลดสำเนาบัตรประชาชน');
+
+
+
+isValid = false;
+
+
+
+}
+
+
+
+
+
+// ตรวจสอบรูปถ่าย
+
+
+
+if (!document.getElementById('photo-file').files.length) {
+
+
+
+showError('photo-file', 'กรุณาอัพโหลดรูปถ่าย');
+
+
+
+isValid = false;
+
+
+
+}
+
+
+
+
+
+return isValid;
+
+
+
+}
+
+
+
+
+
+// ตรวจสอบฟอร์มสาขา
+
+
+
+function validateBranchForm() {
+
+
+
+let isValid = true;
+
+
+
+
+
+// ล้างข้อความเตือนเดิม
+
+
+
+hideError('branch');
+
+
+
+
+
+// ตรวจสอบการเลือกสาขา
+
+
+
+if (!formData.branch) {
+
+
+
+showError('branch', 'กรุณาเลือกสาขาพรรค');
+
+
+
+isValid = false;
+
+
+
+}
+
+
+
+
+
+return isValid;
+
+
+
+}
+
+
+
+
+
+// ตรวจสอบฟอร์มการชำระเงิน
+
+
+
+function validatePaymentForm() {
+
+
+
+let isValid = true;
+
+
+
+
+
+// ล้างข้อความเตือนเดิม
+
+
+
+hideError('payment-slip');
+
+
+
+
+
+// ตรวจสอบการอัพโหลดหลักฐานการโอนเงิน (เฉพาะกรณีเลือกโอนเงิน)
+
+
+
+const paymentMethod = document.querySelector('input[name="payment-method"]:checked').value;
+
+
+
+
+
+if (paymentMethod === 'bank-transfer' && !document.getElementById('payment-slip').files.length) {
+
+
+
+showError('payment-slip', 'กรุณาอัพโหลดหลักฐานการโอนเงิน');
+
+
+
+isValid = false;
+
+
+
+}
+
+
+
+
+
+return isValid;
+
+
+
+}
+
+
+
+
+
+// ----------------------
+
+
+
+// การจัดการขั้นตอน
+
+
+
+// ----------------------
+
+
+
+
+
+// ขั้นตอนที่ 1: ข้อมูลส่วนตัว
+
+
+
+document.getElementById('personal-info-form').addEventListener('submit', function(e) {
+
+
+
+e.preventDefault();
+
+
+
+
+
+if (validatePersonalInfoForm()) {
+
+
+
+// เก็บข้อมูลจากฟอร์ม
+
+
+
+const form = this;
+
+
+
+const formElements = form.elements;
+
+
+
+
+
+for (let i = 0; i < formElements.length; i++) {
+
+
+
+const element = formElements[i];
+
+
+
+if (element.name && element.name !== 'accept-terms') {
+
+
+
+formData.personalInfo[element.name] = element.value;
+
+
+
+}
+
+
+
+}
+
+
+
+
+
+// ไปยังขั้นตอนถัดไป
+
+
+
+goToStep(2);
+
+
+
+} else {
+
+
+
+// เลื่อนไปยังข้อผิดพลาดแรก
+
+
+
+const firstError = document.querySelector('#step1 .error-text:not(.hidden)');
+
+
+
+if (firstError) {
+
+
+
+firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+
+
+}
+
+
+
+}
+
+
+
+});
+
+
+
+
+
+// ขั้นตอนที่ 2: อัพโหลดเอกสาร
+
+
+
+document.getElementById('document-form').addEventListener('submit', function(e) {
+
+
+
+e.preventDefault();
+
+
+
+
+
+if (validateDocumentsForm()) {
+
+
+
+// เก็บข้อมูลไฟล์ (ในสถานการณ์จริงจะต้องอัพโหลดไฟล์ไปยังเซิร์ฟเวอร์)
+
+
+
+formData.documents = {
+
+
+
+idCard: true,
+
+
+
+houseRegistration: document.getElementById('house-registration-file').files.length > 0,
+
+
+
+photo: true
+
+
+
+};
+
+
+
+
+
+// สร้างสาขาพรรค
+
+
+
+const branchesContainer = document.getElementById('branches-container');
+
+
+
+branchesContainer.innerHTML = '';
+
+
+
+
+
+partyBranches.forEach(branch => {
+
+
+
+const branchElement = document.createElement('div');
+
+
+
+branchElement.className = 'party-branch-item';
+
+
+
+branchElement.dataset.branchId = branch.id;
+
+
+
+branchElement.innerHTML = `
+
+
+
+<div class="flex-1">
+
+
+
+<h3 class="font-semibold">${branch.name}</h3>
+
+
+
+<p class="text-sm text-gray-600 dark:text-gray-400">${branch.address}</p>
+
+
+
+<p class="text-xs text-gray-500 dark:text-gray-500 mt-1">สมาชิกปัจจุบัน: ${branch.members} คน</p>
+
+
+
+</div>
+
+
+
+<div class="ml-4">
+
+
+
+<input type="radio" name="branch" value="${branch.id}" class="h-5 w-5 text-primary focus:ring-primary border-gray-300 dark:border-gray-700">
+
+
+
+</div>
+
+
+
+`;
+
+
+
+
+
+branchElement.addEventListener('click', function() {
+
+
+
+// ยกเลิกการเลือกสาขาที่เลือกไว้ก่อนหน้า
+
+
+
+document.querySelectorAll('.party-branch-item').forEach(item => {
+
+
+
+item.classList.remove('selected');
+
+
+
+item.querySelector('input[name="branch"]').checked = false;
+
+
+
+});
+
+
+
+
+
+// เลือกสาขาใหม่
+
+
+
+this.classList.add('selected');
+
+
+
+this.querySelector('input[name="branch"]').checked = true;
+
+
+
+
+
+// บันทึกข้อมูลสาขาที่เลือก
+
+
+
+formData.branch = {
+
+
+
+id: this.dataset.branchId,
+
+
+
+name: branch.name
+
+
+
+};
+
+
+
+
+
+// ซ่อนข้อความ error
+
+
+
+hideError('branch');
+
+
+
+});
+
+
+
+
+
+branchesContainer.appendChild(branchElement);
+
+
+
+});
+
+
+
+
+
+// ไปยังขั้นตอนถัดไป
+
+
+
+goToStep(3);
+
+
+
+} else {
+
+
+
+// เลื่อนไปยังข้อผิดพลาดแรก
+
+
+
+const firstError = document.querySelector('#step2 .error-text:not(.hidden)');
+
+
+
+if (firstError) {
+
+
+
+firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+
+
+}
+
+
+
+}
+
+
+
+});
+
+
+
+
+
+// ค้นหาสาขาพรรค
+
+
+
+document.getElementById('branch-search').addEventListener('input', function() {
+
+
+
+const searchTerm = this.value.toLowerCase().trim();
+
+
+
+const branchItems = document.querySelectorAll('.party-branch-item');
+
+
+
+
+
+branchItems.forEach(item => {
+
+
+
+const branchName = item.querySelector('h3').textContent.toLowerCase();
+
+
+
+const branchAddress = item.querySelector('p').textContent.toLowerCase();
+
+
+
+
+
+if (branchName.includes(searchTerm) || branchAddress.includes(searchTerm)) {
+
+
+
+item.style.display = '';
+
+
+
+} else {
+
+
+
+item.style.display = 'none';
+
+
+
+}
+
+
+
+});
+
+
+
+});
+
+
+
+
+
+// ขั้นตอนที่ 3: เลือกสาขา
+
+
+
+document.getElementById('branch-form').addEventListener('submit', function(e) {
+
+
+
+e.preventDefault();
+
+
+
+
+
+if (validateBranchForm()) {
+
+
+
+// ไปยังขั้นตอนถัดไป
+
+
+
+goToStep(4);
+
+
+
+
+
+// สร้าง QR Code
+
+
+
+drawBasicQRCode();
+
+
+
+}
+
+
+
+});
+
+
+
+
+
+// ขั้นตอนที่ 4: ชำระค่าสมาชิก
+
+
+
+document.getElementById('payment-form').addEventListener('submit', async function(e) {
+
+
+
+e.preventDefault();
+
+
+
+
+
+if (validatePaymentForm()) {
+
+
+
+// เก็บข้อมูลการชำระเงิน
+
+
+
+formData.payment = {
+
+
+
+method: document.querySelector('input[name="payment-method"]:checked').value,
+
+
+
+slip: document.getElementById('payment-slip').files.length > 0
+
+
+
+};
+
+
+
+
+
+// แสดงหน้าโหลด
+
+
+
+loadingContainer.classList.remove('hidden');
+
+
+
+loadingText.textContent = 'กำลังดำเนินการสมัครสมาชิก...';
+
+
+
+
+
+try {
+
+
+
+// จำลองการส่งข้อมูลไปยังเซิร์ฟเวอร์
+
+
+
+await new Promise(resolve => setTimeout(resolve, 2000));
+
+
+
+
+
+// สร้างรหัสสมาชิก
+
+
+
+const memberId = Math.floor(Math.random() * 1000000).toString().padStart(6, '0');
+
+
+
+document.getElementById('member-id').textContent = memberId;
+
+
+
+
+
+// สร้าง HTML สำหรับแสดงข้อมูลสมาชิก
+
+
+
+let memberPrefix = formData.personalInfo.prefix === 'other' ? formData.personalInfo['other-prefix'] : formData.personalInfo.prefix;
+
+
+
+
+
+let memberDetailsHTML = `
+
+
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm">
+
+
+
+<div><span class="font-semibold">ชื่อ-สกุล:</span> ${memberPrefix}${memberPrefix ? ' ' : ''}${formData.personalInfo.firstname} ${formData.personalInfo.lastname}</div>
+
+
+
+<div><span class="font-semibold">เลขบัตรประชาชน:</span> ${formData.personalInfo['id-card']}</div>
+
+
+
+<div><span class="font-semibold">วันที่สมัคร:</span> ${new Date().toLocaleDateString('th-TH')}</div>
+
+
+
+<div><span class="font-semibold">สาขาพรรค:</span> ${formData.branch.name}</div>
+
+
+
+<div><span class="font-semibold">เบอร์โทรศัพท์:</span> ${formData.personalInfo.phone}</div>
+
+
+
+<div><span class="font-semibold">อีเมล:</span> ${formData.personalInfo.email || '-'}</div>
+
+
+
+<div class="md:col-span-2"><span class="font-semibold">ที่อยู่:</span> ${formData.personalInfo.address} อ.${formData.personalInfo.district} จ.${formData.personalInfo.province} ${formData.personalInfo['zip-code']}</div>
+
+
+
+<div class="md:col-span-2"><span class="font-semibold">วิธีการชำระเงิน:</span> ${formData.payment.method === 'bank-transfer' ? 'โอนเงินผ่านธนาคาร' : 'สแกน QR Code'}</div>
+
+
+
+</div>
+
+
+
+`;
+
+
+
+
+
+document.getElementById('member-details').innerHTML = memberDetailsHTML;
+
+
+
+
+
+// ซ่อนหน้าโหลด และแสดงหน้า success
+
+
+
+loadingContainer.classList.add('hidden');
+
+
+
+goToStep(5);
+
+
+
+
+
+} catch (error) {
+
+
+
+console.error('Error submitting form:', error);
+
+
+
+loadingContainer.classList.add('hidden');
+
+
+
+alert('เกิดข้อผิดพลาดในการส่งฟอร์ม กรุณาลองใหม่อีกครั้ง');
+
+
+
+}
+
+
+
+}
+
+
+
+});
+
+
+
+
+
+// ปุ่มย้อนกลับของแต่ละขั้นตอน
+
+
+
+document.getElementById('step2-back').addEventListener('click', () => goToStep(1));
+
+
+
+document.getElementById('step3-back').addEventListener('click', () => goToStep(2));
+
+
+
+document.getElementById('step4-back').addEventListener('click', () => goToStep(3));
+
+
+
+
+
+// ปุ่มกลับหน้าหลักและพิมพ์ใบสมัคร
+
+
+
+document.getElementById('go-home').addEventListener('click', function() {
+
+
+
+// ในสถานการณ์จริงจะเปลี่ยนไปยังหน้าหลัก
+
+
+
+location.reload();
+
+
+
+});
+
+
+
+
+
+document.getElementById('download-receipt').addEventListener('click', function() {
+
+
+
+alert('ฟังก์ชันการพิมพ์ใบสมัครจะถูกพัฒนาในเวอร์ชันถัดไป');
+
+
+});
+
+
+
+});
+
+
+
+</script>
+
+
+
+</body>
+
+
+
+</html>
